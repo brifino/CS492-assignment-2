@@ -23,9 +23,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+
 import com.example.assignment2.ui.theme.Assignment2Theme
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +45,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color.White
                 ) {
                     Counter()
                 }
@@ -56,20 +65,53 @@ fun Counter(modifier: Modifier = Modifier) {
 
 @Composable
 fun HandleCount(modifier: Modifier = Modifier) {
-    var count by remember { mutableStateOf(1) }
+    var count by remember { mutableStateOf(3) }
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Spacer(modifier = Modifier.height(500.dp))
+        Spacer(modifier = Modifier.height(75.dp))
+        Image(
+            painter = painterResource(id = R.drawable.dissc),
+            contentDescription = "App Logo",
+            modifier = Modifier.size(325.dp)
+                //.weight(1f)
+                .shadow(5.dp)
+                .border(10.dp, Color.White)
+        )
+        Spacer(modifier = Modifier.height(50.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround) {
+            Text("$count", fontSize = (36.sp))
+        }
+        Spacer(modifier = Modifier.height(50.dp))
+        Box(
+            contentAlignment = Alignment.TopStart,
+            modifier = Modifier
+                .background(color = Color(0xFFa6f5ff))
+                .shadow(2.dp)
+                .border(width = 2.dp, color = Color.Black)
+                .padding(15.dp)
+                .width(300.dp)
+                .height(50.dp)
+        ) {
+            Column(horizontalAlignment = Alignment.Start) {
+                Text("Disc Golf", fontSize = (18.sp))
+                Spacer(modifier = Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.SpaceAround) {
+                    Text("Brahm Rifino ", fontSize = (14.sp), fontWeight = FontWeight.Bold)
+                    Text("(CS 492)", fontSize = (14.sp))
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(30.dp))
+        Row( modifier = Modifier.padding(bottom = 16.dp), horizontalArrangement = Arrangement.SpaceAround) {
             Button(
                 onClick = {
                     count -= 1
-                    if(count < 0){
-                        count = 0
+                    if(count < 1){
+                        count = 5
                     }}
             ) {
                 Text(text = "Previous", fontSize = 24.sp)
             }
-            Spacer(modifier = Modifier.width(90.dp))
+            Spacer(modifier = Modifier.width(45.dp))
             Button(
                 onClick = {
                     count += 1
@@ -77,7 +119,7 @@ fun HandleCount(modifier: Modifier = Modifier) {
                         count = 1
                     }
                 },
-                modifier = Modifier.padding(end = 16.dp)
+                modifier = Modifier.width(150.dp)
             ) {
                 Text(text = "Next", fontSize = 24.sp)
             }
