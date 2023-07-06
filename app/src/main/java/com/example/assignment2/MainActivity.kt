@@ -87,7 +87,7 @@ fun HandleCount(modifier: Modifier = Modifier) {
                 .border(10.dp, Color.White)
         )
         Spacer(modifier = Modifier.height(50.dp))
-        Text("$count", fontSize = (36.sp))
+        Text("Current Count: $count", fontSize = (36.sp))
         Spacer(modifier = Modifier.height(50.dp))
         Box(
             contentAlignment = Alignment.TopStart,
